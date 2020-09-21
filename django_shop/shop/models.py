@@ -5,7 +5,7 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    username = models.CharField(min_length=5, unique=True)
+    username = models.CharField(max_length=60, unique=True)
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
     email = models.EmailField()
@@ -27,13 +27,13 @@ class Product(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete='CASCADE')
-    product = models.ForeignKey(Product, null=True, blank=True, on_delete='CASCADE')
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE)
     count = models.PositiveIntegerField(default=0)
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete='CASCADE')
-    product = models.ForeignKey(Product, null=True, blank=True, on_delete='CASCADE')
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE)
     count = models.PositiveIntegerField(default=0)
     order_date = models.DateTimeField()
